@@ -50,7 +50,12 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Right", new AutoLineRight());
 		SmartDashboard.putData("Auto mode", autoChooser);
 		//SmarasdftDashboard.putNumber("Match Time:", DriverStation.getInstance().getMatchTime());
-		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

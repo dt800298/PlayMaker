@@ -2,6 +2,7 @@ package org.usfirst.frc.team548.robot;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
@@ -15,20 +16,24 @@ public class Server {
 		
 	}
 	public static void run(){
-		 try {
-	          Socket skt = new Socket("206.57.198.201", 5801);
-	          BufferedReader in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-	          System.out.print("Received string: '");
-
-	          while (!in.ready()) {}
+		try {
+	         ServerSocket srvr = new ServerSocket(5801);
+	         Socket skt = srvr.accept();
+	         System.out.print("Server has connected!\n");
+	         Thread.sleep(100);
+	         BufferedReader in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
+	         System.out.print("Received string: '");
+	    
 	          System.out.println(in.readLine()); // Read one line and output it
 
 	          System.out.print("'\n");
 	          in.close();
-	       }
-	       catch(Exception e) {
-	          e.printStackTrace();
-	       }
+	         skt.close();
+	         srvr.close();
+	      }
+	      catch(Exception e) {
+	         e.printStackTrace();
+	      }
 	}
 
 }
